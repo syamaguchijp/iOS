@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MPK-Cl-aXP">
-                                <rect key="frame" x="0.0" y="44" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="JPC-1i-2B9"/>
+                                    <constraint firstAttribute="height" constant="40" id="JPC-1i-2B9"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RTQ-Nt-88Q">
                                     <size key="itemSize" width="128" height="128"/>
@@ -31,7 +31,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TabCell" id="Eun-Z4-5sf" customClass="TabCollectionViewCell" customModule="SampleTopTab" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-49" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="-44" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="G79-4f-kZr">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -59,7 +59,7 @@
                                                 <constraint firstItem="hkS-AS-1rh" firstAttribute="leading" secondItem="G79-4f-kZr" secondAttribute="leading" id="UXI-53-sVb"/>
                                                 <constraint firstAttribute="bottom" secondItem="46p-0j-Ldf" secondAttribute="bottom" id="d0I-gP-fZF"/>
                                                 <constraint firstAttribute="trailing" secondItem="hkS-AS-1rh" secondAttribute="trailing" id="g63-d6-ZBA"/>
-                                                <constraint firstItem="46p-0j-Ldf" firstAttribute="top" secondItem="hkS-AS-1rh" secondAttribute="bottom" id="m4p-Vg-5nf"/>
+                                                <constraint firstItem="46p-0j-Ldf" firstAttribute="top" secondItem="hkS-AS-1rh" secondAttribute="bottom" constant="5" id="m4p-Vg-5nf"/>
                                                 <constraint firstAttribute="trailing" secondItem="46p-0j-Ldf" secondAttribute="trailing" id="qkF-Qd-7Pc"/>
                                                 <constraint firstItem="46p-0j-Ldf" firstAttribute="leading" secondItem="G79-4f-kZr" secondAttribute="leading" id="uys-pQ-fA6"/>
                                             </constraints>
@@ -72,7 +72,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ie2-mg-Xck">
-                                <rect key="frame" x="0.0" y="74" width="414" height="788"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="778"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="edr-U2-55Q">
                                     <size key="itemSize" width="128" height="128"/>

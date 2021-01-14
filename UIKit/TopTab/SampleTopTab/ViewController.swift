@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     private let tabCellIdentifier = "TabCell"
     private let contentCellIdentifier = "ContentCell"
-    private let tabCellHeight = CGFloat(30)
+    private let tabCellHeight = CGFloat(40)
     private let tabCellWidth = CGFloat(100)
     
     private var tabNames = [String]()
@@ -42,8 +42,8 @@ class ViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let webVC1 = storyboard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-        webVC1.url = "https://yahoo.co.jp"
-        tabNames.append("Yahoo!")
+        webVC1.url = "https://www.apple.com/jp/"
+        tabNames.append("Apple")
         contentVCs.append(webVC1)
         
         let webVC2 = storyboard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
