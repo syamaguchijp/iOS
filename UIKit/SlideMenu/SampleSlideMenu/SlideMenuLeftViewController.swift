@@ -15,7 +15,9 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
     private let slideMenuRowCount: Int = 4
     private let slideMenuRowHeight: CGFloat = 60.0
     private let slideMenuBackgroundColor = UIColor(red: 68.0, green: 68.0, blue: 68.0, alpha: 1.0)
-    private let slideMenuTextColor = UIColor.white
+    private let selectedTextColor = UIColor.red
+    private let deselectedTextColor = UIColor.black
+    private let headerViewHeight: CGFloat = 60.0
     
     private var footerViewHeight: CGFloat = 0.0
     
@@ -41,7 +43,7 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLayoutSubviews()
         
         // フッタービューに付与すべき高さを設定する
-        footerViewHeight = tableView.frame.size.height - slideMenuRowHeight * CGFloat(slideMenuRowCount)
+        footerViewHeight = tableView.frame.size.height - slideMenuRowHeight * CGFloat(slideMenuRowCount) - headerViewHeight
         
         // シャドウをつけ、メニュー部分とのフリンジを際立たせる
         let caLayer = self.view.layer
@@ -54,6 +56,12 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     // MARK: TableView Delegate
+    
+    /// ヘッダービューの高さを設定する
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return headerViewHeight
+    }
     
     /// フッタービューの高さを設定する
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -94,7 +102,7 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
         cell.backgroundColor = UIColor.clear
         cell.selectionStyle = .none//.default
         
-        cell.textLabel?.text = "test"
+        cell.textLabel?.text = SlideMenuController.shared.menus[indexPath.row].title
         
         return cell
     }
@@ -102,13 +110,27 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
     /// テーブルビューの行をタップした時にコールされる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        // 選択されているセルの文字色を変更
+        tableView.cellForRow(at: indexPath)?.textLabel?.textColor = selectedTextColor
+        
         // メニューを閉じる
         SlideMenuController.shared.closeMenu()
         
-        // 選択された行に従ってビューコントローラを立ち上げる
+        // 選択された行に従って処理する
+        SlideMenuController.shared.currentIndex = indexPath.row
+        if let vc = SlideMenuController.shared.rightMainViewController as? ViewController {
+            vc.loadWebView()
+        }
         
         
 
+
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        // セルの選択が外れた時に文字色を戻す
+        tableView.cellForRow(at: indexPath)?.textLabel?.textColor = deselectedTextColor
     }
     
     // MARK: Tap Event

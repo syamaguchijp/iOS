@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import WebKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var webView: WKWebView!
+    
     var leftVC: SlideMenuLeftViewController?
     
     override func viewDidLoad() {
@@ -20,6 +23,9 @@ class ViewController: UIViewController {
         
         SlideMenuController.shared.leftSlideMenuView = leftVC!.view
         SlideMenuController.shared.rightMainView = self.navigationController?.view
+        SlideMenuController.shared.rightMainViewController = self
+        
+        self.loadWebView()
     }
 
     override func viewDidLayoutSubviews() {
@@ -35,10 +41,19 @@ class ViewController: UIViewController {
         caLayer.shouldRasterize = true
         caLayer.masksToBounds = false
     }
+    
     /// ナビゲーションバー左側 ハンバーガーをタップした時にコールされる
     @IBAction func didTapHamburger(_ sender: Any) {
         // スライドメニューをトグルさせる
         SlideMenuController.shared.toggleMenuOpen()
+    }
+    
+    /// WebViewの読み込みを行う
+    func loadWebView() {
+        
+        let url = URL(string: SlideMenuController.shared.menus[SlideMenuController.shared.currentIndex].url)
+        let request = URLRequest(url: url!)
+        self.webView.load(request)
     }
     
 }

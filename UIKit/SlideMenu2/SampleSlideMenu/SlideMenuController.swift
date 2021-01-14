@@ -16,11 +16,32 @@ class SlideMenuController: NSObject {
     
     var leftSlideMenuView: UIView?
     var rightMainView: UIView?
+    var rightMainViewController: UIViewController?
     var isMenuOpen = false
+    var menus = [Menu]()
+    var currentIndex = 0
     
     private override init() {
         
         super.init()
+        
+        generateMenus()
+    }
+    
+    // メニューを生成する
+    private func generateMenus() {
+        
+        let menu1 = Menu(title: "Apple", url: "https://www.apple.com/jp/")
+        menus.append(menu1)
+        
+        let menu2 = Menu(title: "Yahoo!", url: "https://yahoo.co.jp")
+        menus.append(menu2)
+        
+        let menu3 = Menu(title: "Google", url: "https://google.com")
+        menus.append(menu3)
+        
+        let menu4 = Menu(title: "Twitter", url: "https://twitter.com")
+        menus.append(menu4)
     }
     
     /// メニューの開閉をトグルさせる
