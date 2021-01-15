@@ -38,8 +38,8 @@ class KeyBoardManager: NSObject {
     /// キーボードを表示したときや閉じるときをハンドリングできるように、オブザーバ、ジェスチャレコグナイザを設定する
     func generateObserver() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         guard let sv = scrollView else {
             return
@@ -54,8 +54,8 @@ class KeyBoardManager: NSObject {
     /// キーボードが表示される時に NSNotification からコールされる
     @objc func keyboardWillShow(notification: NSNotification) {
         
-        guard let info = notification.userInfo, let keyboardFrameInfo = info[UIKeyboardFrameEndUserInfoKey],
-            let keyboardAnimationInfo = info[UIKeyboardAnimationDurationUserInfoKey] else {
+        guard let info = notification.userInfo, let keyboardFrameInfo = info[UIResponder.keyboardFrameEndUserInfoKey],
+            let keyboardAnimationInfo = info[UIResponder.keyboardAnimationDurationUserInfoKey] else {
                 return
         }
         
@@ -130,7 +130,7 @@ class KeyBoardManager: NSObject {
         UIView.beginAnimations("ResizeForKeyboard", context: nil)
         UIView.setAnimationDuration(duration)
         
-        let contentInsets = UIEdgeInsetsMake(sv.contentInset.top, 0, moveSize, 0) // 上、左、下、右
+        let contentInsets = UIEdgeInsets.init(top: sv.contentInset.top, left: 0, bottom: moveSize, right: 0) // 上、左、下、右
         sv.contentInset = contentInsets
         sv.scrollIndicatorInsets = contentInsets
         sv.contentOffset = CGPoint(x: 0, y : sv.contentOffset.y + moveSize) // 現在のスクロール地点から、さらに動く分を足して、スクロール位置を指定する

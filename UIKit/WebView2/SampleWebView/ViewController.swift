@@ -74,7 +74,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKNavigationDelega
         
         if (velocity.y > 0) {
             // ナビゲーションバーやツールバーを非表示にする
-            UIView.animate(withDuration: kToolBarAnimationDurationSec, delay: 0, options: UIViewAnimationOptions(), animations: {
+            UIView.animate(withDuration: kToolBarAnimationDurationSec, delay: 0, options: UIView.AnimationOptions(), animations: {
                 if let navigationController = self.navigationController {
                     navigationController.setNavigationBarHidden(true, animated: true)
                     navigationController.setToolbarHidden(true, animated: true)
@@ -83,7 +83,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKNavigationDelega
             
         } else {
             // ナビゲーションバーやツールバーを表示する
-            UIView.animate(withDuration:kToolBarAnimationDurationSec, delay: 0, options: UIViewAnimationOptions(), animations: {
+            UIView.animate(withDuration:kToolBarAnimationDurationSec, delay: 0, options: UIView.AnimationOptions(), animations: {
                 if let navigationController = self.navigationController {
                     navigationController.setNavigationBarHidden(false, animated: true)
                     navigationController.setToolbarHidden(false, animated: true)
@@ -105,30 +105,30 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKNavigationDelega
     /// ツールバーを生成する
     func generateToolBar() {
         
-        self.spacer = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        self.spacer = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
         
-        let backInnerButton: UIButton = UIButton(type: UIButtonType.custom)
-        backInnerButton.setImage(UIImage(named: "btn_prev.png"), for: UIControlState())
+        let backInnerButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
+        backInnerButton.setImage(UIImage(named: "btn_prev.png"), for: UIControl.State())
         backInnerButton.frame = CGRect(x: 0, y: 0, width: kToolBarIconHeightOfWebView, height: kToolBarIconHeightOfWebView)
-        backInnerButton.addTarget(self, action: #selector(goBack), for: UIControlEvents.touchUpInside)
+        backInnerButton.addTarget(self, action: #selector(goBack), for: UIControl.Event.touchUpInside)
         self.backButton = UIBarButtonItem.init(customView: backInnerButton)
         
-        let forwardInnerButton: UIButton = UIButton(type: UIButtonType.custom)
-        forwardInnerButton.setImage(UIImage(named: "btn_next.png"), for: UIControlState())
+        let forwardInnerButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
+        forwardInnerButton.setImage(UIImage(named: "btn_next.png"), for: UIControl.State())
         forwardInnerButton.frame = CGRect(x: 0, y: 0, width: kToolBarIconHeightOfWebView, height: kToolBarIconHeightOfWebView)
-        forwardInnerButton.addTarget(self, action: #selector(goForward), for: UIControlEvents.touchUpInside)
+        forwardInnerButton.addTarget(self, action: #selector(goForward), for: UIControl.Event.touchUpInside)
         self.forwardButton = UIBarButtonItem.init(customView: forwardInnerButton)
         
-        let refreshInnerButton: UIButton = UIButton(type: UIButtonType.custom)
-        refreshInnerButton.setImage(UIImage(named: "btn_reload.png"), for: UIControlState())
+        let refreshInnerButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
+        refreshInnerButton.setImage(UIImage(named: "btn_reload.png"), for: UIControl.State())
         refreshInnerButton.frame = CGRect(x: 0, y: 0, width: kToolBarIconHeightOfWebView, height: kToolBarIconHeightOfWebView)
-        refreshInnerButton.addTarget(self, action: #selector(reloadWebView), for: UIControlEvents.touchUpInside)
+        refreshInnerButton.addTarget(self, action: #selector(reloadWebView), for: UIControl.Event.touchUpInside)
         self.refreshButton = UIBarButtonItem.init(customView: refreshInnerButton)
         
-        let quitInnerButton: UIButton = UIButton(type: UIButtonType.custom)
-        quitInnerButton.setImage(UIImage(named: "btn_close.png"), for: UIControlState())
+        let quitInnerButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
+        quitInnerButton.setImage(UIImage(named: "btn_close.png"), for: UIControl.State())
         quitInnerButton.frame = CGRect(x: 0, y: 0, width: kToolBarIconHeightOfWebView, height: kToolBarIconHeightOfWebView)
-        quitInnerButton.addTarget(self, action: #selector(killMyself), for: UIControlEvents.touchUpInside)
+        quitInnerButton.addTarget(self, action: #selector(killMyself), for: UIControl.Event.touchUpInside)
         self.quitButton = UIBarButtonItem.init(customView: quitInnerButton)
         
         self.toolbarItems = [self.backButton!, self.forwardButton!, self.refreshButton!, self.spacer!, self.spacer!];

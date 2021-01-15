@@ -61,7 +61,7 @@ class SlideMenuController: NSObject {
         
         self.prepareMenuForReveal()
         
-        UIView.animate(withDuration: SlideMenuOpenDurationSec, delay: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: SlideMenuOpenDurationSec, delay: 0.5, options: UIView.AnimationOptions.curveEaseInOut, animations: { () -> Void in
             
             guard let rightView = self.rightMainView else {
                 return
@@ -81,7 +81,7 @@ class SlideMenuController: NSObject {
     /// メニューを閉じる
     func closeMenu() {
         
-        UIView.animate(withDuration: SlideMenuOpenDurationSec, delay: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: SlideMenuOpenDurationSec, delay: 0.5, options: UIView.AnimationOptions.curveEaseInOut, animations: { () -> Void in
             
             guard let rightView = self.rightMainView else {
                 return

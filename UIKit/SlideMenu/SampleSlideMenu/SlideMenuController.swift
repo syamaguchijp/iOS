@@ -49,7 +49,7 @@ class SlideMenuController: NSObject {
         
         self.prepareMenuForReveal()
         
-        UIView.animate(withDuration: SlideMenuOpenDurationSec, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: SlideMenuOpenDurationSec, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: { () -> Void in
             
             guard let leftView = self.leftSlideMenuView else {
                 return
@@ -68,7 +68,7 @@ class SlideMenuController: NSObject {
     /// メニューを閉じる
     func closeMenu() {
         
-        UIView.animate(withDuration: SlideMenuOpenDurationSec, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: SlideMenuOpenDurationSec, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: { () -> Void in
             
             guard let leftView = self.leftSlideMenuView else {
                 return
@@ -92,7 +92,7 @@ class SlideMenuController: NSObject {
         }
         
         rightView.window?.insertSubview(leftView, at: 0)
-        rightView.window?.bringSubview(toFront: leftView)
+        rightView.window?.bringSubviewToFront(leftView)
         
         self.updateMenuFrameAndTransformAccordingToOrientation()
     }
