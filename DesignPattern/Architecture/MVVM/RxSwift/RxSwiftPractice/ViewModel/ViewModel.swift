@@ -23,6 +23,7 @@ struct ViewModelInput {
 
 protocol ViewModelOutput {
     var labelText: Driver<String?> { get }
+    var labelColor: Driver<UIColor> { get }
     var isIndicatorAnimating: Driver<Bool> { get }
     var isIndicatorHidden: Driver<Bool> { get }
 }
@@ -31,7 +32,9 @@ class ViewModel {
     
     var output: ViewModelOutput?
     
+    // 出力のためのBehaviorRelay
     private let labelTextBehaviorRelay = BehaviorRelay<String>(value: "")
+    private let labelColorBehaviorRelay = BehaviorRelay<UIColor>(value: .black)
     private let indicatorAnimatingBehaviorRelay = BehaviorRelay<Bool>(value: false)
     private let indicatorHiddenBehaviorRelay = BehaviorRelay<Bool>(value: true)
     
@@ -43,6 +46,8 @@ class ViewModel {
     private var newPassword = ""
     
     init(input: ViewModelInput) {
+        
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
         
         self.output = self
         
@@ -83,7 +88,8 @@ class ViewModel {
         indicatorAnimatingBehaviorRelay.accept(true)
         indicatorHiddenBehaviorRelay.accept(false)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // インジケータの状態を確認するため1秒遅延処理
+            
             self.userManager.updateUser(user: user, handler: {(user: User?, error: UserModelError?) in
                 
                 print("\(NSStringFromClass(type(of: self))) \(#function) handler")
@@ -98,16 +104,22 @@ class ViewModel {
     // updateUser の結果、画面下部のLabelを更新する
     private func displayResultLabel(user: User?, error: UserModelError?) {
         
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
         var labelString = "通信に不具合が発生しました"
+        var labelColor = UIColor.red
+        
         if error == UserModelError.invalidName {
             labelString = "名前の入力がありません"
         } else if error == UserModelError.invalidPassword {
             labelString = "パスワードの入力がありません"
         } else if let _ = user {
             labelString = "データ更新に成功しました"
+            labelColor = UIColor.black
         }
         
         labelTextBehaviorRelay.accept(labelString)
+        labelColorBehaviorRelay.accept(labelColor)
     }
 }
 
@@ -118,6 +130,13 @@ extension ViewModel: ViewModelOutput {
         return labelTextBehaviorRelay
             .map { "\($0)" }
             .asDriver(onErrorJustReturn: nil)
+    }
+    
+    var labelColor: Driver<UIColor> {
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        return labelColorBehaviorRelay
+            .map { $0 }
+            .asDriver(onErrorJustReturn: .black)
     }
     
     var isIndicatorAnimating: Driver<Bool> {

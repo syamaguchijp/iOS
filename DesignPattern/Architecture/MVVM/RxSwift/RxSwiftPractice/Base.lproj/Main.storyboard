@@ -49,7 +49,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="TOO-YS-9FU"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="登録"/>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bvi-Zu-9ic">
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>

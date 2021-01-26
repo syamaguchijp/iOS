@@ -45,6 +45,10 @@ class ViewController: UIViewController {
             .drive(label.rx.text)
             .disposed(by: disposeBag)
         
+        viewModel.output?.labelColor
+            .drive(labelColor)
+            .disposed(by: disposeBag)
+        
         viewModel.output?.isIndicatorAnimating
             .drive(indicator.rx.isAnimating)
             .disposed(by: disposeBag)
@@ -52,6 +56,13 @@ class ViewController: UIViewController {
         viewModel.output?.isIndicatorHidden
             .drive(indicator.rx.isHidden)
             .disposed(by: disposeBag)
+    }
+    
+    // UILabelのTextColorはrx拡張されていないため、独自に定義する
+    private var labelColor: Binder<UIColor> {
+        return Binder(self) { me, color in
+            me.label.textColor = color
+        }
     }
 }
 
