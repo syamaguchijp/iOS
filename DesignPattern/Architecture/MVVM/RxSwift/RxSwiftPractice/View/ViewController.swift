@@ -30,21 +30,28 @@ class ViewController: UIViewController {
 
     private func setupViewModel() {
         
-        viewModel = ViewModel()
+        // viewModelを生成し、inputを登録する
         
         let input = ViewModelInput(
             buttonObservable: button.rx.tap.asObservable(),
             userNameTextFieldObservable: textField.rx.text.asObservable(),
             passwordTextFieldObservable: textField2.rx.text.asObservable()
         )
+        viewModel = ViewModel(input: input)
         
-        let binder = ViewModelBinder(
-            labelText: label.rx.text,
-            isIndicatorAnimating: indicator.rx.isAnimating,
-            isIndicatorHidden: indicator.rx.isHidden
-        )
-     
-        viewModel.setup(input: input, binder: binder)
+        // outputとbinderを紐付ける
+        
+        viewModel.output?.labelText
+            .drive(label.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.output?.isIndicatorAnimating
+            .drive(indicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+        
+        viewModel.output?.isIndicatorHidden
+            .drive(indicator.rx.isHidden)
+            .disposed(by: disposeBag)
     }
 }
 

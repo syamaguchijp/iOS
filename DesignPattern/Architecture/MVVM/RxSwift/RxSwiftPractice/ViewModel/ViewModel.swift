@@ -21,26 +21,15 @@ struct ViewModelInput {
     let passwordTextFieldObservable: Observable<String?>
 }
 
-struct ViewModelBinder {
-    var labelText: Binder<String?>
-    var isIndicatorAnimating: Binder<Bool>
-    var isIndicatorHidden: Binder<Bool>
-}
-
 protocol ViewModelOutput {
     var labelText: Driver<String?> { get }
     var isIndicatorAnimating: Driver<Bool> { get }
     var isIndicatorHidden: Driver<Bool> { get }
 }
 
-protocol ViewModelType {
-    var outputs: ViewModelOutput? { get }
-    func setup(input: ViewModelInput, binder: ViewModelBinder)
-}
-
-class ViewModel: ViewModelType {
+class ViewModel {
     
-    var outputs: ViewModelOutput?
+    var output: ViewModelOutput?
     
     private let labelTextBehaviorRelay = BehaviorRelay<String>(value: "")
     private let indicatorAnimatingBehaviorRelay = BehaviorRelay<Bool>(value: false)
@@ -53,13 +42,9 @@ class ViewModel: ViewModelType {
     private var newUserName = ""
     private var newPassword = ""
     
-    init() {
-        self.outputs = self
-    }
-    
-    func setup(input: ViewModelInput, binder: ViewModelBinder) {
+    init(input: ViewModelInput) {
         
-        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        self.output = self
         
         self.input = input
         
@@ -84,18 +69,6 @@ class ViewModel: ViewModelType {
                 print("\(NSStringFromClass(type(of: self!))) \(#function) value=\(String(describing: value))")
                 self?.newPassword = value ?? ""
             }
-            .disposed(by: disposeBag)
-        
-        outputs?.labelText
-            .drive(binder.labelText)
-            .disposed(by: disposeBag)
-        
-        outputs?.isIndicatorAnimating
-            .drive(binder.isIndicatorAnimating)
-            .disposed(by: disposeBag)
-        
-        outputs?.isIndicatorHidden
-            .drive(binder.isIndicatorHidden)
             .disposed(by: disposeBag)
     }
     
