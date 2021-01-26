@@ -15,28 +15,37 @@ import RxCocoa
 // * Viewの参照は持たない
 // * UIKitをimportしない
 
-
 struct ViewModelInput {
     let buttonObservable: Observable<Void>
     let userNameTextFieldObservable: Observable<String?>
     let passwordTextFieldObservable: Observable<String?>
 }
 
+struct ViewModelBinder {
+    var labelText: Binder<String?>
+    var isIndicatorAnimating: Binder<Bool>
+    var isIndicatorHidden: Binder<Bool>
+}
+
 protocol ViewModelOutput {
     var labelText: Driver<String?> { get }
-    //var labelColor: Observable<UIColor?> { get }
+    var isIndicatorAnimating: Driver<Bool> { get }
+    var isIndicatorHidden: Driver<Bool> { get }
 }
 
 protocol ViewModelType {
     var outputs: ViewModelOutput? { get }
-    func setup(input: ViewModelInput, binder: Binder<String?>)
+    func setup(input: ViewModelInput, binder: ViewModelBinder)
 }
 
 class ViewModel: ViewModelType {
-
+    
     var outputs: ViewModelOutput?
     
-    private let behaviorRelay = BehaviorRelay<String>(value: "")
+    private let labelTextBehaviorRelay = BehaviorRelay<String>(value: "")
+    private let indicatorAnimatingBehaviorRelay = BehaviorRelay<Bool>(value: false)
+    private let indicatorHiddenBehaviorRelay = BehaviorRelay<Bool>(value: true)
+    
     private let disposeBag = DisposeBag()
     private let userManager = UserManager()
     
@@ -48,7 +57,7 @@ class ViewModel: ViewModelType {
         self.outputs = self
     }
     
-    func setup(input: ViewModelInput, binder: Binder<String?>) {
+    func setup(input: ViewModelInput, binder: ViewModelBinder) {
         
         print("\(NSStringFromClass(type(of: self))) \(#function)")
         
@@ -78,7 +87,15 @@ class ViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         outputs?.labelText
-            .drive(binder)
+            .drive(binder.labelText)
+            .disposed(by: disposeBag)
+        
+        outputs?.isIndicatorAnimating
+            .drive(binder.isIndicatorAnimating)
+            .disposed(by: disposeBag)
+        
+        outputs?.isIndicatorHidden
+            .drive(binder.isIndicatorHidden)
             .disposed(by: disposeBag)
     }
     
@@ -90,13 +107,19 @@ class ViewModel: ViewModelType {
         user.newUserName = newUserName
         user.newPassword = newPassword
         
-        userManager.updateUser(user: user,
-                               handler: {(user: User?, error: UserModelError?) in
-            
-            print("\(NSStringFromClass(type(of: self))) \(#function) handler")
-            
-            self.displayResultLabel(user: user, error: error)
-        })
+        indicatorAnimatingBehaviorRelay.accept(true)
+        indicatorHiddenBehaviorRelay.accept(false)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.userManager.updateUser(user: user, handler: {(user: User?, error: UserModelError?) in
+                
+                print("\(NSStringFromClass(type(of: self))) \(#function) handler")
+                
+                self.displayResultLabel(user: user, error: error)
+                self.indicatorAnimatingBehaviorRelay.accept(false)
+                self.indicatorHiddenBehaviorRelay.accept(true)
+            })
+        }
     }
     
     // updateUser の結果、画面下部のLabelを更新する
@@ -111,7 +134,7 @@ class ViewModel: ViewModelType {
             labelString = "データ更新に成功しました"
         }
         
-        behaviorRelay.accept(labelString)
+        labelTextBehaviorRelay.accept(labelString)
     }
 }
 
@@ -119,8 +142,22 @@ extension ViewModel: ViewModelOutput {
     
     var labelText: Driver<String?> {
         print("\(NSStringFromClass(type(of: self))) \(#function)")
-        return behaviorRelay
+        return labelTextBehaviorRelay
             .map { "\($0)" }
             .asDriver(onErrorJustReturn: nil)
+    }
+    
+    var isIndicatorAnimating: Driver<Bool> {
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        return indicatorAnimatingBehaviorRelay
+            .map { $0 }
+            .asDriver(onErrorJustReturn: true)
+    }
+    
+    var isIndicatorHidden: Driver<Bool> {
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        return indicatorHiddenBehaviorRelay
+            .map { $0 }
+            .asDriver(onErrorJustReturn: true)
     }
 }

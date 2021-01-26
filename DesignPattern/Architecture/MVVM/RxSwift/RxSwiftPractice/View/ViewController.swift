@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var textField: UITextField! // UserName
     @IBOutlet weak var textField2: UITextField! // Password
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private let disposeBag = DisposeBag()
     
@@ -37,8 +38,13 @@ class ViewController: UIViewController {
             passwordTextFieldObservable: textField2.rx.text.asObservable()
         )
         
-        viewModel.setup(input: input, binder: label.rx.text)
-
+        let binder = ViewModelBinder(
+            labelText: label.rx.text,
+            isIndicatorAnimating: indicator.rx.isAnimating,
+            isIndicatorHidden: indicator.rx.isHidden
+        )
+     
+        viewModel.setup(input: input, binder: binder)
     }
 }
 

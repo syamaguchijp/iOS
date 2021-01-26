@@ -51,6 +51,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bvi-Zu-9ic">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -63,9 +66,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jln-b4-vCm" secondAttribute="trailing" constant="20" id="Ec6-eA-H00"/>
                             <constraint firstItem="UuU-rZ-RNl" firstAttribute="top" secondItem="A9m-MA-S0a" secondAttribute="bottom" constant="50" id="H8B-0P-X9A"/>
                             <constraint firstItem="UuU-rZ-RNl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cXe-ba-8sn"/>
+                            <constraint firstItem="bvi-Zu-9ic" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eD0-C6-DpM"/>
                             <constraint firstItem="5mB-LW-8FV" firstAttribute="top" secondItem="OCE-tu-PiV" secondAttribute="bottom" constant="5" id="eMJ-GH-NBb"/>
                             <constraint firstItem="g2R-Qn-wrg" firstAttribute="top" secondItem="5mB-LW-8FV" secondAttribute="bottom" constant="30" id="fce-SN-B1p"/>
                             <constraint firstItem="g2R-Qn-wrg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="g8F-3b-jXn"/>
+                            <constraint firstItem="bvi-Zu-9ic" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="hAz-Fq-LDu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="A9m-MA-S0a" secondAttribute="trailing" constant="20" id="mE5-ai-tst"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5mB-LW-8FV" secondAttribute="trailing" constant="20" id="wSj-FQ-Ecm"/>
                             <constraint firstItem="jln-b4-vCm" firstAttribute="top" secondItem="A9m-MA-S0a" secondAttribute="bottom" constant="20" id="zoh-kJ-f53"/>
@@ -73,6 +78,7 @@
                     </view>
                     <connections>
                         <outlet property="button" destination="jln-b4-vCm" id="ycY-gt-jlo"/>
+                        <outlet property="indicator" destination="bvi-Zu-9ic" id="awK-pu-aBP"/>
                         <outlet property="label" destination="UuU-rZ-RNl" id="c1h-gz-sVk"/>
                         <outlet property="textField" destination="5mB-LW-8FV" id="5Za-81-chU"/>
                         <outlet property="textField2" destination="A9m-MA-S0a" id="BNv-gr-yYY"/>
