@@ -16,7 +16,7 @@
 		849C085025C01D27001A0969 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C084F25C01D27001A0969 /* NetworkManager.swift */; };
 		849C085425C01D30001A0969 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C085225C01D30001A0969 /* User.swift */; };
 		849C085525C01D30001A0969 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C085325C01D30001A0969 /* UserManager.swift */; };
-		849C085825C0FF3B001A0969 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C085725C0FF3B001A0969 /* Presenter.swift */; };
+		849C085B25C108BF001A0969 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C085A25C108BF001A0969 /* Presenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		849C084F25C01D27001A0969 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		849C085225C01D30001A0969 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		849C085325C01D30001A0969 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		849C085725C0FF3B001A0969 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = SOURCE_ROOT; };
+		849C085A25C108BF001A0969 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 		849C084D25C01B2A001A0969 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				849C085725C0FF3B001A0969 /* Presenter.swift */,
+				849C085A25C108BF001A0969 /* Presenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -174,7 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				849C085525C01D30001A0969 /* UserManager.swift in Sources */,
-				849C085825C0FF3B001A0969 /* Presenter.swift in Sources */,
+				849C085B25C108BF001A0969 /* Presenter.swift in Sources */,
 				849C085025C01D27001A0969 /* NetworkManager.swift in Sources */,
 				849C083A25C01A6A001A0969 /* ViewController.swift in Sources */,
 				849C083625C01A6A001A0969 /* AppDelegate.swift in Sources */,
