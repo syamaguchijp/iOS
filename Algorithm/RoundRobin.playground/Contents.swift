@@ -1,12 +1,6 @@
-//
-//  RoundRobin.swift
-//  SampleAlgorithm
-//
-//  Copyright © 2020年 Yamaguchi. All rights reserved.
-//
-
 import UIKit
 
+// 総当り作成
 class RoundRobin: NSObject {
     
     static func makeRoundRobin(array: [Int]) -> [[Int]] {
@@ -76,5 +70,8 @@ class RoundRobin: NSObject {
         }
         return false
     }
-
 }
+
+let answer = RoundRobin.makeRoundRobin(array: [0, 1, 2, 3])
+print(answer)
+

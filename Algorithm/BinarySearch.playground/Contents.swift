@@ -1,12 +1,6 @@
-//
-//  BinarySearch.swift
-//  SampleAlgorithm
-//
-//  Copyright © 2020年 Yamaguchi. All rights reserved.
-//
-
 import UIKit
 
+// 二分探索
 class BinarySearch: NSObject {
     
     /// @param searchNumber 探索する数値
@@ -30,5 +24,10 @@ class BinarySearch: NSObject {
         
         return nil
     }
-
 }
+
+let answer1 = BinarySearch.search(searchNumber: 99, array: ([Int])(0..<100))
+if let answer1 = answer1 {
+    print(answer1)
+}
+

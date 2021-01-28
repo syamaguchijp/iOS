@@ -1,12 +1,6 @@
-//
-//  QuickSort.swift
-//  SampleAlgorithm
-//
-//  Copyright © 2020年 Yamaguchi. All rights reserved.
-//
-
 import UIKit
 
+// クイックソート
 class QuickSort: NSObject {
     
     static func sort(array: inout [Int]) -> [Int] {
@@ -49,7 +43,6 @@ class QuickSort: NSObject {
         array[left] = array[right]
         array[right] = tempValue
     }
-    
 }
 
 class QuickSortObject: NSObject {
@@ -95,9 +88,12 @@ class QuickSortObject: NSObject {
         array[left] = array[right]
         array[right] = tempValue
     }
-    
 }
 
 class Hoge: NSObject {
     var number: Int = 0
 }
+
+var array = [5, 4, 3, 2, 1, 0]
+let answer = QuickSort.sort(array: &array)
+print(answer)
