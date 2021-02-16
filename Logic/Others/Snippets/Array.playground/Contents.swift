@@ -1,10 +1,3 @@
-//
-//  ArrayDictionarySnippet.swift
-//  SampleSnippet
-//
-//  Copyright © 2021年 Yamaguchi. All rights reserved.
-//
-
 import UIKit
 
 class ArrayDictionarySnippet: NSObject {
@@ -108,7 +101,7 @@ class ArrayDictionarySnippet: NSObject {
         print("a.1=\(a.1)") // 100
         
         // データ型なし かつ 名前付き
-        let b = (name: "taro", age: 10)
+        let b = (name: "yama", age: 10)
         print("b.name=\(b.name)") // "taro"
         print("b.age=\(b.age)") // 10
         
@@ -119,10 +112,13 @@ class ArrayDictionarySnippet: NSObject {
         
         // データ型あり かつ 名前付き
         let d:(name: String, age: Int)
-        d.name = "taro"
+        d.name = "yama"
         d.age = 10
         print("d.name=\(d.name)")
         print("d.age=\(d.age)")
     }
     
 }
+
+ArrayDictionarySnippet.init()
+

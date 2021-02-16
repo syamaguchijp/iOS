@@ -1,10 +1,3 @@
-//
-//  EnumSample.swift
-//  SampleSnippet
-//
-//  Copyright © 2021年 Yamaguchi. All rights reserved.
-//
-
 import UIKit
 
 enum EnumSample: Int {
@@ -16,5 +9,7 @@ enum EnumSample: Int {
     case thursday
     case friday
     case saturday
-
 }
+
+print("EnumSample.monday = \(EnumSample.monday)") // case名 monday
+print("EnumSample.monday = \(EnumSample.monday.rawValue)") // case名に対応するInteger

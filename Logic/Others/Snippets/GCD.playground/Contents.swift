@@ -1,10 +1,3 @@
-//
-//  GCDSnippet.swift
-//  SampleSnippet
-//
-//  Copyright © 2021年 Yamaguchi. All rights reserved.
-//
-
 import UIKit
 
 class GCDSnippet: NSObject {
@@ -65,3 +58,13 @@ class GCDSnippet: NSObject {
         }
     }
 }
+
+let gcd = GCDSnippet.init()
+gcd.execute()
+gcd.execute()
+
+/*
+let gcd = GCDSnippet.init()
+gcd.executeSemaphore()
+gcd.executeSemaphore()
+ */

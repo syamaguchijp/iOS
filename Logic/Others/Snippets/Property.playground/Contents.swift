@@ -1,10 +1,3 @@
-//
-//  PropertySample.swift
-//  SampleSnippet
-//
-//  Copyright © 2021年 Yamaguchi. All rights reserved.
-//
-
 import UIKit
 
 class PropertySample: NSObject {
@@ -73,5 +66,14 @@ class PropertySample: NSObject {
             print("didSet \(self.myStringObserved)")
         }
     }
-    
 }
+
+let propertySample = PropertySample.init(str: "yamaguchi")
+print("propertySample.myString = \(propertySample.myString)")
+propertySample.myName = "taro"
+print("propertySample.myName = \(String(describing: propertySample.myName))")
+propertySample.myStringObserved = "あいうえお"
+print("propertySample.myStringObserved = \(propertySample.myStringObserved)")
+
+var hoge = "BBBB"
+var propertySample2 = PropertySample.init(str: "yamaguchi", hoge: &hoge) // &で参照渡し

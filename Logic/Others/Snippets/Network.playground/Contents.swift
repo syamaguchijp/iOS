@@ -1,10 +1,3 @@
-//
-//  NetworkManager.swift
-//  SampleSnippet
-//
-//  Copyright © 2021年 Yamaguchi. All rights reserved.
-//
-
 import UIKit
 
 class NetworkManager: NSObject {
@@ -136,3 +129,15 @@ extension NetworkManager: URLSessionDownloadDelegate {
         session.invalidateAndCancel()
     }
 }
+
+NetworkManager.init().getUrlSession(
+    urlString: "https://httpbin.org/get",
+    queryItems: [URLQueryItem(name: "a", value: "foo"), URLQueryItem(name: "b", value: "1234")])
+
+/*
+NetworkManager.init().postUrlSession(
+    urlString: "https://httpbin.org/post",
+    parameter: "a=foo&b=1234")
+*/
+
+//NetworkManager.init().downloadImage(url: "https://httpbin.org/image/png")
