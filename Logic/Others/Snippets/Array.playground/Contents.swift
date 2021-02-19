@@ -32,6 +32,14 @@ class ArrayDictionarySnippet: NSObject {
         for i in 0...2 {
             print("myArray[i] = \(myArray[i])")
         }
+        (0 ..< 5).forEach {(num) in
+            print(num)
+        }
+        
+        // 配列の末尾からデクリメントさせる
+        for i in (0..<myArray.count).reversed() {
+            print("myArray[i] = \(myArray[i])")
+        }
         
         for element in myArray where element < 4{
             print("where element = \(element)")
@@ -45,6 +53,13 @@ class ArrayDictionarySnippet: NSObject {
             }
         }
         
+        // Step
+        for i in stride(from: 0, to: 3, by: 2) {
+            print(i)
+        }
+        for i in stride(from: 0, to: 3, by: 2).reversed() {
+            print(i)
+        }
         
         // MARK: Dictionary
         
