@@ -61,6 +61,11 @@ class ArrayDictionarySnippet: NSObject {
             print(i)
         }
         
+        // DeepCopy
+        var copyAry = myArray // Swiftは配列は値型のためデフォルトでDeepCopyとなる
+        copyAry[0] = 9999
+        print("myArray[0]=\(myArray[0])")
+
         // MARK: Dictionary
         
         myDictionary = [:]

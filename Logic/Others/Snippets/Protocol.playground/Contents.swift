@@ -2,12 +2,12 @@
 
 import UIKit
 
-protocol SomeCallback {
+protocol SomeCallback: class {
     func didCallBack(number: Int)
 }
 
 class Callee {
-    var callback: SomeCallback?
+    weak var callback: SomeCallback?
 
     func execute(){
         callback?.didCallBack(number: 1)
