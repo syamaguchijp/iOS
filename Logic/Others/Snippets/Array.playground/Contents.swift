@@ -10,7 +10,9 @@ class ArrayDictionarySnippet: NSObject {
     
         // MARK: Array
         
-        myArray = []
+        myArray = [] // 空の配列
+        myArray = Array() // 空の配列
+        myArray = Array(repeating: 0, count: 3) // Array(repeating: 初期値, count: 要素数)
         myArray = [2, 3, 4, 5, 6, 7]
         myArray.insert(1, at: 0) // 要素の追加（0の位置に値1を追加）
         myArray.append(8) // 末尾に追加
