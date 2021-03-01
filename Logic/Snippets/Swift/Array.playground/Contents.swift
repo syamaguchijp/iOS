@@ -13,6 +13,8 @@ class ArrayDictionarySnippet: NSObject {
         myArray = [] // 空の配列
         myArray = Array() // 空の配列
         myArray = Array(repeating: 0, count: 3) // Array(repeating: 初期値, count: 要素数)
+        // repeatingの中にクラスなどの参照型を入れる場合は、その参照が複製されて配列の要素がすべて同じになることに注意！
+        Array<Int?>(repeating: nil, count: 5) // 要素がnilの配列
         myArray = [2, 3, 4, 5, 6, 7]
         myArray.insert(1, at: 0) // 要素の追加（0の位置に値1を追加）
         myArray.append(8) // 末尾に追加
