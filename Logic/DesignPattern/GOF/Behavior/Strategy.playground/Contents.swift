@@ -27,7 +27,7 @@ class CarDriver {
     }
     
     func drive() {
-        return self.strategy.runMax()
+        self.strategy.runMax()
     }
 }
 

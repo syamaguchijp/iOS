@@ -32,9 +32,9 @@ class Cat: Peer {
 
 let mediator = Mediator()
 let dog = Dog()
-let cat = Dog()
+let cat = Cat()
 let dog2 = Dog()
-let cat2 = Dog()
+let cat2 = Cat()
 mediator.addPeer(peer: dog)
 mediator.addPeer(peer: cat)
 mediator.addPeer(peer: dog2)
