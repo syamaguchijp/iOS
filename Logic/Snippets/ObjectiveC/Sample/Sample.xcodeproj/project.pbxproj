@@ -19,6 +19,7 @@
 		8443E81425E88DB000FA4A14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8443E81225E88DB000FA4A14 /* LaunchScreen.storyboard */; };
 		8443E81725E88DB000FA4A14 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8443E81625E88DB000FA4A14 /* main.m */; };
 		8443E82525E88E2D00FA4A14 /* ArraySample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8443E82425E88E2D00FA4A14 /* ArraySample.m */; };
+		84A127CF2605C3FE008967C5 /* StringSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A127CE2605C3FE008967C5 /* StringSample.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		8443E81625E88DB000FA4A14 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8443E82325E88E2D00FA4A14 /* ArraySample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArraySample.h; sourceTree = "<group>"; };
 		8443E82425E88E2D00FA4A14 /* ArraySample.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArraySample.m; sourceTree = "<group>"; };
+		84A127CD2605C3FE008967C5 /* StringSample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringSample.h; sourceTree = "<group>"; };
+		84A127CE2605C3FE008967C5 /* StringSample.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StringSample.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,8 @@
 				8419EFD125E89DE000CC84E5 /* ValueOrRef.m */,
 				8419EFE425E8B82F00CC84E5 /* SubThread.h */,
 				8419EFE525E8B82F00CC84E5 /* SubThread.m */,
+				84A127CD2605C3FE008967C5 /* StringSample.h */,
+				84A127CE2605C3FE008967C5 /* StringSample.m */,
 			);
 			path = Snippets;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 				8419EFD225E89DE000CC84E5 /* ValueOrRef.m in Sources */,
 				8419EFDD25E89E9500CC84E5 /* User.m in Sources */,
 				8443E80C25E88DAE00FA4A14 /* ViewController.m in Sources */,
+				84A127CF2605C3FE008967C5 /* StringSample.m in Sources */,
 				8443E80625E88DAE00FA4A14 /* AppDelegate.m in Sources */,
 				8419EFE625E8B82F00CC84E5 /* SubThread.m in Sources */,
 				8443E81725E88DB000FA4A14 /* main.m in Sources */,

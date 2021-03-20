@@ -11,6 +11,7 @@
 #import "SpecialUser.h"
 #import "ValueOrRef.h"
 #import "SubThread.h"
+#import "StringSample.h"
 
 @interface AppDelegate () <UserDelegate>
 
@@ -46,6 +47,8 @@
     [st runSemaphore];
     [st runSemaphore];
      */
+    
+    StringSample *stringSample = [[StringSample alloc] init];
     
     return YES;
 }
