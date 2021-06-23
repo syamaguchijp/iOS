@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
+
         /*
         // Self-Sizingを無効にするには
         // セルの高さ

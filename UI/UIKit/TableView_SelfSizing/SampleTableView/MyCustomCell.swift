@@ -10,4 +10,13 @@ import UIKit
 class MyCustomCell: UITableViewCell {
 
     @IBOutlet weak var myLabel: UILabel!
+    
+    // セルが再利用される前にコールされる
+    override func prepareForReuse() {
+        
+        super.prepareForReuse()
+        
+        
+        
+    }
 }
