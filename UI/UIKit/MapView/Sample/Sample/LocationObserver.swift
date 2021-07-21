@@ -32,6 +32,7 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         
         let status = CLLocationManager.authorizationStatus()
         if status == .authorizedWhenInUse {
+            stopLocationManager()
             startLocationManager()
         }
     }
@@ -44,6 +45,13 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100.0
         locationManager.startUpdatingLocation()
+    }
+    
+    private func stopLocationManager() {
+        
+        Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        locationManager.stopUpdatingLocation()
     }
     
     // MARK: CLLocationManagerDelegate
@@ -70,6 +78,7 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         
         let status = CLLocationManager.authorizationStatus()
         if status == .authorizedWhenInUse {
+            stopLocationManager()
             startLocationManager()
         }
     }
