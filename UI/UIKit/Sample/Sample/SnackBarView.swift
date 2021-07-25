@@ -12,21 +12,20 @@ class SnackBarView: UIView {
     let actionButton = UIButton()
     let titleLabel = UILabel()
     
-    var animationDuration = 1.0
     var sunriseMode = false // 下から上へせり上がる挙動
-    
-    private let minHeight = CGFloat(100)
-    private let xMargin = CGFloat(5)
-    private let yMargin = CGFloat(10)
-    private let xPadding = CGFloat(5)
-    private let yPadding = CGFloat(5)
-    private let buttonHeight = CGFloat(40)
-    private let buttonWidth = CGFloat(60)
-    private let cornerRadius = CGFloat(5)
+    var animationDuration = 1.0
+    var minHeight = CGFloat(100)
+    var xMargin = CGFloat(10)
+    var yMargin = CGFloat(10)
+    var xPadding = CGFloat(10)
+    var yPadding = CGFloat(10)
+    var buttonHeight = CGFloat(40)
+    var buttonWidth = CGFloat(60)
     
     private var topAnchorNormal: NSLayoutConstraint?
     private var bottomAnchorSunrise: NSLayoutConstraint?
     private var finalHeight = CGFloat(0)
+    private var completion: (() -> Void)?
     
     override init(frame: CGRect) {
         
@@ -35,22 +34,19 @@ class SnackBarView: UIView {
         super.init(frame: frame)
         
         self.frame = CGRect.zero
-        self.layer.cornerRadius = cornerRadius
-        self.backgroundColor = .gray
         self.translatesAutoresizingMaskIntoConstraints = false
         
         actionButton.frame = CGRect.zero
-        actionButton.backgroundColor = .darkGray
-        actionButton.setTitleColor(.red, for:.normal)
         actionButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(actionButton)
         
         titleLabel.frame = CGRect.zero
-        titleLabel.textColor = .white
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(titleLabel)
+        
+        specifyParams()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -72,9 +68,24 @@ class SnackBarView: UIView {
         print("\(NSStringFromClass(type(of: self))) \(#function)")
     }
     
-    func start(baseView: UIView) {
+    func specifyParams() {
         
         print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        self.layer.cornerRadius = CGFloat(5)
+        self.backgroundColor = .gray
+        
+        actionButton.backgroundColor = .darkGray
+        actionButton.setTitleColor(.red, for:.normal)
+        
+        titleLabel.textColor = .white
+    }
+    
+    func start(baseView: UIView, completion: @escaping () -> Void) {
+        
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        self.completion = completion
         
         // self
         baseView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapSuperView)))
@@ -178,6 +189,9 @@ class SnackBarView: UIView {
         UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
             self.superview?.layoutIfNeeded()
         }, completion: {(finished) in
+            if let completion = self.completion {
+                completion()
+            }
             self.removeFromSuperview()
         })
     }
@@ -194,6 +208,9 @@ class SnackBarView: UIView {
         UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
             self.superview?.layoutIfNeeded()
         }, completion: {(finished) in
+            if let completion = self.completion {
+                completion()
+            }
             self.removeFromSuperview()
         })
     }
