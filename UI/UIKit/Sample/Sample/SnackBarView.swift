@@ -8,26 +8,49 @@
 import UIKit
 
 class SnackBarView: UIView {
-    
-    var fixedHeight = CGFloat(120)
-    var buttonHeight = CGFloat(40)
-    var buttonWidth = CGFloat(60)
-    var buttonText = ""
-    var labelText = ""
-    var animationDuration = 1.0
-    var sunrizeMode = false // 下からせり上がる挙動
 
+    let actionButton = UIButton()
+    let titleLabel = UILabel()
+    
+    var animationDuration = 1.0
+    var sunriseMode = false // 下から上へせり上がる挙動
+    
     private let minHeight = CGFloat(100)
     private let xMargin = CGFloat(5)
     private let yMargin = CGFloat(10)
     private let xPadding = CGFloat(5)
     private let yPadding = CGFloat(5)
-    private var safeAreaFrame: CGRect?
+    private let buttonHeight = CGFloat(40)
+    private let buttonWidth = CGFloat(60)
+    private let cornerRadius = CGFloat(5)
+    
+    private var topAnchorNormal: NSLayoutConstraint?
+    private var bottomAnchorSunrise: NSLayoutConstraint?
+    private var finalHeight = CGFloat(0)
     
     override init(frame: CGRect) {
+        
         print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
         super.init(frame: frame)
+        
+        self.frame = CGRect.zero
+        self.layer.cornerRadius = cornerRadius
         self.backgroundColor = .gray
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        actionButton.frame = CGRect.zero
+        actionButton.backgroundColor = .darkGray
+        actionButton.setTitleColor(.red, for:.normal)
+        actionButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(actionButton)
+        
+        titleLabel.frame = CGRect.zero
+        titleLabel.textColor = .white
+        titleLabel.numberOfLines = 0
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(titleLabel)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -36,10 +59,13 @@ class SnackBarView: UIView {
     }
     
     convenience init(labelText: String, buttonText: String) {
+        
         print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
         self.init(frame: .zero)
-        self.labelText = labelText
-        self.buttonText = buttonText
+        
+        titleLabel.text = labelText
+        actionButton.setTitle(buttonText, for:.normal)
     }
     
     deinit {
@@ -50,22 +76,16 @@ class SnackBarView: UIView {
         
         print("\(NSStringFromClass(type(of: self))) \(#function)")
         
-        safeAreaFrame = baseView.safeAreaLayoutGuide.layoutFrame
-        
-        self.frame = CGRect.zero
-        self.layer.cornerRadius = 5
-        self.translatesAutoresizingMaskIntoConstraints = false
+        // self
         baseView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapSuperView)))
         baseView.addSubview(self)
+        do {
+            let leading = self.leadingAnchor.constraint(equalTo: self.superview!.leadingAnchor, constant: xMargin)
+            let trailing = self.trailingAnchor.constraint(equalTo: self.superview!.trailingAnchor, constant: -xMargin)
+            NSLayoutConstraint.activate([leading, trailing])
+        }
         
         // Button
-        let actionButton = UIButton()
-        actionButton.frame = CGRect.zero
-        actionButton.setTitle(buttonText, for:UIControl.State.normal)
-        actionButton.backgroundColor = .blue
-        actionButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(actionButton)
         do {
             let trailing = actionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -xPadding)
             let bottom = actionButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -yPadding)
@@ -75,41 +95,60 @@ class SnackBarView: UIView {
         }
         
         // Label
-        let titleLabel = UILabel()
-        titleLabel.frame = CGRect.zero
-        titleLabel.text = labelText
-        titleLabel.backgroundColor = .red
-        titleLabel.numberOfLines = 0
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(titleLabel)
         do {
             let leading = titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: xPadding)
             let trailing = titleLabel.trailingAnchor.constraint(equalTo: actionButton.leadingAnchor, constant: 0)
             let vertical = titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0)
+            let bottom = titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
             titleLabel.sizeToFit()
-            NSLayoutConstraint.activate([leading, trailing, vertical])
+            NSLayoutConstraint.activate([leading, trailing, vertical, bottom])
         }
-        
-        // self
-        let top = self.topAnchor.constraint(equalTo: baseView.topAnchor, constant: -fixedHeight)
-        let leading = self.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xMargin)
-        let trailing = self.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -xMargin)
-        let bottom = self.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0)
-        NSLayoutConstraint.activate([leading, trailing, top, bottom])
         
         self.superview?.layoutIfNeeded()
         print("label height=\(titleLabel.frame.size.height)")
-        if titleLabel.frame.size.height < minHeight {
+        finalHeight = titleLabel.frame.size.height + yPadding * 2
+        if finalHeight < minHeight {
             // Labelの高さが小さいときは、補正する
-            do {
-                let height = titleLabel.heightAnchor.constraint(equalToConstant: fixedHeight)
-                NSLayoutConstraint.activate([height])
-            }
+            finalHeight = minHeight
         }
         
-        // Animation開始
+        if !sunriseMode {
+            startAnimation()
+        } else {
+            startAnimationSunrise()
+        }
+    }
+    
+    private func startAnimation() {
+        
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        let height = titleLabel.heightAnchor.constraint(equalToConstant: finalHeight)
+        let top = self.topAnchor.constraint(equalTo: self.superview!.topAnchor, constant: -finalHeight)
+        NSLayoutConstraint.activate([height, top])
+        topAnchorNormal = top
         self.superview?.layoutIfNeeded()
-        top.constant += self.safeAreaFrame!.origin.y + self.fixedHeight
+        
+        // Animation開始
+        top.constant += self.superview!.safeAreaLayoutGuide.layoutFrame.origin.y + finalHeight
+        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
+            self.superview?.layoutIfNeeded()
+        }, completion: {(finished) in
+        })
+    }
+    
+    private func startAnimationSunrise() {
+        
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        let height = titleLabel.heightAnchor.constraint(equalToConstant: finalHeight)
+        let bottom = self.bottomAnchor.constraint(equalTo: self.superview!.safeAreaLayoutGuide.bottomAnchor, constant: finalHeight)
+        NSLayoutConstraint.activate([height, bottom])
+        self.superview?.layoutIfNeeded()
+    
+        // Animation開始
+        bottom.constant -= finalHeight
+        bottomAnchorSunrise = bottom
         UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
             self.superview?.layoutIfNeeded()
         }, completion: {(finished) in
@@ -120,9 +159,38 @@ class SnackBarView: UIView {
         
         print("\(NSStringFromClass(type(of: self))) \(#function)")
         
+        if !sunriseMode {
+            startEndAnimation()
+        } else {
+            startEndAnimationSunrise()
+        }
+    }
+    
+    private func startEndAnimation() {
+        
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        guard let topAnchorNormal = topAnchorNormal else {
+            return
+        }
         // Animation開始
-        let top = self.topAnchor.constraint(equalTo: self.superview!.topAnchor, constant: -self.frame.height)
-        NSLayoutConstraint.activate([top])
+        topAnchorNormal.constant -= (self.frame.height + self.superview!.safeAreaInsets.top)
+        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
+            self.superview?.layoutIfNeeded()
+        }, completion: {(finished) in
+            self.removeFromSuperview()
+        })
+    }
+    
+    private func startEndAnimationSunrise() {
+        
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        guard let bottomAnchorSunrise = bottomAnchorSunrise else {
+            return
+        }
+        // Animation開始
+        bottomAnchorSunrise.constant += CGFloat(self.frame.height + self.superview!.safeAreaInsets.bottom)
         UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
             self.superview?.layoutIfNeeded()
         }, completion: {(finished) in
