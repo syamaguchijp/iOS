@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SampleContainerView" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPb-9a-fQR">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="334"/>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5EB-dD-PrH">
+                                <rect key="frame" x="0.0" y="334" width="375" height="333"/>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="UPb-9a-fQR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="0Vc-WD-66e"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5EB-dD-PrH" secondAttribute="bottom" id="7AA-7a-heI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UPb-9a-fQR" secondAttribute="trailing" id="J2z-r2-rd9"/>
+                            <constraint firstItem="5EB-dD-PrH" firstAttribute="top" secondItem="UPb-9a-fQR" secondAttribute="bottom" id="dn4-qu-2gr"/>
+                            <constraint firstItem="UPb-9a-fQR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eeh-WF-YX1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5EB-dD-PrH" secondAttribute="trailing" id="pty-5x-zed"/>
+                            <constraint firstItem="UPb-9a-fQR" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="sQR-zg-4E9"/>
+                            <constraint firstItem="5EB-dD-PrH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uqs-oB-swG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="firstContainerView" destination="UPb-9a-fQR" id="5sI-MO-OMG"/>
+                        <outlet property="secondContainerView" destination="5EB-dD-PrH" id="gih-ao-RGc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="22" y="120"/>
+        </scene>
+    </scenes>
+</document>
