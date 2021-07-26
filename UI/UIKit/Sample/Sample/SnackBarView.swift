@@ -142,7 +142,7 @@ class SnackBarView: UIView {
         
         // Animation開始
         top.constant += self.superview!.safeAreaLayoutGuide.layoutFrame.origin.y + finalHeight
-        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
+        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.curveEaseOut], animations: {
             self.superview?.layoutIfNeeded()
         }, completion: {(finished) in
         })
@@ -160,7 +160,7 @@ class SnackBarView: UIView {
         // Animation開始
         bottom.constant -= finalHeight
         bottomAnchorSunrise = bottom
-        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
+        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.curveEaseOut], animations: {
             self.superview?.layoutIfNeeded()
         }, completion: {(finished) in
         })
@@ -186,7 +186,7 @@ class SnackBarView: UIView {
         }
         // Animation開始
         topAnchorNormal.constant -= (self.frame.height + self.superview!.safeAreaInsets.top)
-        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
+        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.curveEaseOut], animations: {
             self.superview?.layoutIfNeeded()
         }, completion: {(finished) in
             if let completion = self.completion {
@@ -205,7 +205,7 @@ class SnackBarView: UIView {
         }
         // Animation開始
         bottomAnchorSunrise.constant += CGFloat(self.frame.height + self.superview!.safeAreaInsets.bottom)
-        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.allowUserInteraction, .curveEaseOut], animations: {
+        UIView.animate(withDuration:animationDuration, delay:0.0, options:[.curveEaseOut], animations: {
             self.superview?.layoutIfNeeded()
         }, completion: {(finished) in
             if let completion = self.completion {
