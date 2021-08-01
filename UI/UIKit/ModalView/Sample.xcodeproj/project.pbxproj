@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D059D38126B69EF300E6D07A /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059D37F26B69EF300E6D07A /* ScrollViewController.swift */; };
+		D059D38226B69EF300E6D07A /* ScrollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D059D38026B69EF300E6D07A /* ScrollViewController.xib */; };
 		D07EBF8326AE43CF00877573 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EBF8226AE43CF00877573 /* AppDelegate.swift */; };
 		D07EBF8526AE43CF00877573 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EBF8426AE43CF00877573 /* SceneDelegate.swift */; };
 		D07EBF8726AE43CF00877573 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EBF8626AE43CF00877573 /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D059D37F26B69EF300E6D07A /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
+		D059D38026B69EF300E6D07A /* ScrollViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollViewController.xib; sourceTree = "<group>"; };
 		D07EBF7F26AE43CF00877573 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07EBF8226AE43CF00877573 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D07EBF8426AE43CF00877573 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 				D07EBF9626AE471100877573 /* ModalViewController.swift */,
 				D07EBF9826AE502C00877573 /* HalfModalViewController.swift */,
 				D07EBF9926AE502C00877573 /* HalfModalViewController.xib */,
+				D059D37F26B69EF300E6D07A /* ScrollViewController.swift */,
+				D059D38026B69EF300E6D07A /* ScrollViewController.xib */,
 			);
 			path = Sample;
 			sourceTree = "<group>";
@@ -135,6 +141,7 @@
 			files = (
 				D07EBF8F26AE43D000877573 /* LaunchScreen.storyboard in Resources */,
 				D07EBF8C26AE43D000877573 /* Assets.xcassets in Resources */,
+				D059D38226B69EF300E6D07A /* ScrollViewController.xib in Resources */,
 				D07EBF8A26AE43CF00877573 /* Main.storyboard in Resources */,
 				D07EBF9B26AE502C00877573 /* HalfModalViewController.xib in Resources */,
 			);
@@ -148,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D07EBF9A26AE502C00877573 /* HalfModalViewController.swift in Sources */,
+				D059D38126B69EF300E6D07A /* ScrollViewController.swift in Sources */,
 				D07EBF9726AE471100877573 /* ModalViewController.swift in Sources */,
 				D07EBF8726AE43CF00877573 /* ViewController.swift in Sources */,
 				D07EBF8326AE43CF00877573 /* AppDelegate.swift in Sources */,

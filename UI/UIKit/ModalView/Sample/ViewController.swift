@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var button4: UIButton!
+    @IBOutlet weak var button5: UIButton!
     
     let sb = UIStoryboard(name: "Main", bundle: nil)
     
@@ -58,8 +59,16 @@ class ViewController: UIViewController {
         let vc = HalfModalViewController(nibName: "HalfModalViewController", bundle: nil)
         vc.modalPresentationStyle = .fullScreen
         vc.modalPresentationStyle = .overCurrentContext // この設定をしないと遷移後に透明部分が黒くなってしまう
-        self.present(vc, animated: true, completion: nil)
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func didTapButton5(_ sender: Any) {
         
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        let vc = ScrollViewController(nibName: "ScrollViewController", bundle: nil)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
 }
