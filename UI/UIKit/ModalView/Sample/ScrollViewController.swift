@@ -16,6 +16,7 @@ class ScrollViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
 
         scrollView.delegate = self
+        scrollView.bounces = false
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -28,4 +29,5 @@ class ScrollViewController: UIViewController, UIScrollViewDelegate {
             self.dismiss(animated: true, completion: nil)
         }
     }
+
 }

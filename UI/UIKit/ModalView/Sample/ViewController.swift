@@ -19,7 +19,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func didTapButton1(_ sender: Any) {
@@ -29,7 +28,7 @@ class ViewController: UIViewController {
         let vc = sb.instantiateViewController(withIdentifier: "ModalViewController")
         // https://developer.apple.com/library/archive/featuredarticles/ViewControllerPGforiPhoneOS/PresentingaViewController.html#//apple_ref/doc/uid/TP40007457-CH14-SW1
         vc.modalPresentationStyle = .formSheet
-        vc.isModalInPresentation = false // trueにするとスワイプで消えなくなる
+        vc.isModalInPresentation = false // trueにするとDragDownで消えなくなる
         present(vc, animated: true, completion: nil)
     }
     
@@ -38,6 +37,7 @@ class ViewController: UIViewController {
         print("\(NSStringFromClass(type(of: self))) \(#function)")
         
         let vc = sb.instantiateViewController(withIdentifier: "ModalViewController")
+        //let vc = ScrollViewController(nibName: "ScrollViewController", bundle: nil)
         vc.modalPresentationStyle = .pageSheet
         vc.isModalInPresentation = false
         present(vc, animated: true, completion: nil)
