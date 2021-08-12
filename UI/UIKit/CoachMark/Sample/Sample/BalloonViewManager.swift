@@ -8,9 +8,13 @@
 import UIKit
 
 enum BalloonViewHorizontal: Int {
-    case LEFT = 0
+    case LEFT
     case CENTER
     case RIGHT
+}
+enum BalloonViewVertical: Int {
+    case TOP
+    case BOTTOM
 }
 
 class BalloonViewManager: NSObject {
@@ -21,7 +25,7 @@ class BalloonViewManager: NSObject {
     private let triangleView = UIView()
     
     func generate(baseView: UIView, targetView: UIView, labelText: String, color: UIColor,
-                  horizontal: BalloonViewHorizontal) {
+                  horizontal: BalloonViewHorizontal, vertical: BalloonViewVertical) {
         
         // 三角形
         triangleView.frame = CGRect.zero
@@ -34,8 +38,16 @@ class BalloonViewManager: NSObject {
             let width = triangleView.widthAnchor.constraint(equalToConstant: CGFloat(30))
             let height = triangleView.heightAnchor.constraint(equalToConstant: CGFloat(30))
             let horizontal = triangleView.centerXAnchor.constraint(equalTo: targetView.centerXAnchor, constant: 0)
-            let top = triangleView.topAnchor.constraint(equalTo: targetView.bottomAnchor, constant: 5)
-            NSLayoutConstraint.activate([width, height, horizontal, top])
+            NSLayoutConstraint.activate([width, height, horizontal])
+            
+            if vertical == BalloonViewVertical.BOTTOM {
+                let top = triangleView.topAnchor.constraint(equalTo: targetView.bottomAnchor, constant: 5)
+                NSLayoutConstraint.activate([top])
+                
+            } else if vertical == BalloonViewVertical.TOP {
+                let bottom = triangleView.bottomAnchor.constraint(equalTo: targetView.topAnchor, constant: -5)
+                NSLayoutConstraint.activate([bottom])
+            }
         }
         
         // 長方形
@@ -46,8 +58,7 @@ class BalloonViewManager: NSObject {
         baseView.addSubview(baloonView)
         do {
             let width = baloonView.widthAnchor.constraint(equalTo: baloonView.superview!.widthAnchor, multiplier: CGFloat(0.7))
-            let top = baloonView.topAnchor.constraint(equalTo: targetView.bottomAnchor, constant:10)
-            NSLayoutConstraint.activate([width, top])
+            NSLayoutConstraint.activate([width])
             
             if horizontal == BalloonViewHorizontal.LEFT {
                 let leading = baloonView.leadingAnchor.constraint(equalTo: baloonView.superview!.leadingAnchor, constant: xMargin)
@@ -60,6 +71,14 @@ class BalloonViewManager: NSObject {
             } else if horizontal == BalloonViewHorizontal.RIGHT {
                 let trailing = baloonView.trailingAnchor.constraint(equalTo: baloonView.superview!.trailingAnchor, constant: -xMargin)
                 NSLayoutConstraint.activate([trailing])
+            }
+            
+            if vertical == BalloonViewVertical.BOTTOM {
+                let top = baloonView.topAnchor.constraint(equalTo: targetView.bottomAnchor, constant:10)
+                NSLayoutConstraint.activate([top])
+            } else if vertical == BalloonViewVertical.TOP {
+                let bottom = baloonView.bottomAnchor.constraint(equalTo: targetView.topAnchor, constant:-10)
+                NSLayoutConstraint.activate([bottom])
             }
         }
     }
