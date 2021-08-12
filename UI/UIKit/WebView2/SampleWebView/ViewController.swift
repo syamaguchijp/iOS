@@ -30,8 +30,14 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKNavigationDelega
         super.viewDidLoad()
         
         self.url = "https://www.apple.com/jp"
+        
         self.webView.navigationDelegate = self
         self.webView.scrollView.delegate = self
+        self.webView.allowsBackForwardNavigationGestures = true // スワイプで進む戻るを実行
+        self.webView.scrollView.bounces = true
+        let refreshControl = UIRefreshControl()
+        self.webView.scrollView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshWebView(sender:)), for: .valueChanged)
         
         self.generateToolBar()
         self.loadWebView()
@@ -100,6 +106,13 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKNavigationDelega
         let url = URL(string: self.url)
         let request = URLRequest(url: url!)
         self.webView.load(request)
+    }
+    
+    // UIRefreshControlによってページをリロードする
+    @objc func refreshWebView(sender: UIRefreshControl) {
+        
+        self.webView.reload()
+        sender.endRefreshing()
     }
     
     /// ツールバーを生成する
