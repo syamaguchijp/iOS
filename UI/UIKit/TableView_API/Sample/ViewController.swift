@@ -10,8 +10,9 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    
+    private let refreshControl = UIRefreshControl()
     private var rowDataArray: [RowData] = []
     
     override func viewDidLoad() {
@@ -20,6 +21,8 @@ class ViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
         
         removeEmptyCell()
     }
@@ -30,6 +33,11 @@ class ViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
+        loadData()
+    }
+    
+    private func loadData() {
+        
         indicatorView.startAnimating()
         
         ApiManager.init().retrieveData(completion: {(data) in
@@ -38,13 +46,19 @@ class ViewController: UIViewController {
                 self.indicatorView.stopAnimating()
                 self.tableView.reloadData()
                 self.removeEmptyCell()
+                self.refreshControl.endRefreshing()
             }
         })
     }
     
-    func removeEmptyCell() {
+    private func removeEmptyCell() {
         
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+    }
+    
+    @objc private func refresh(sender: UIRefreshControl) {
+        
+        loadData()
     }
 }
 
