@@ -25,7 +25,7 @@ class BalloonViewManager: NSObject {
     private let triangleView = UIView()
     
     func generate(baseView: UIView, targetView: UIView, labelText: String, color: UIColor,
-                  horizontal: BalloonViewHorizontal, vertical: BalloonViewVertical) {
+                  horizontal: BalloonViewHorizontal, vertical: BalloonViewVertical, widthPercent: Float) {
         
         // 三角形
         triangleView.frame = CGRect.zero
@@ -57,7 +57,7 @@ class BalloonViewManager: NSObject {
         }
         baseView.addSubview(baloonView)
         do {
-            let width = baloonView.widthAnchor.constraint(equalTo: baloonView.superview!.widthAnchor, multiplier: CGFloat(0.7))
+            let width = baloonView.widthAnchor.constraint(equalTo: baloonView.superview!.widthAnchor, multiplier: CGFloat(widthPercent))
             NSLayoutConstraint.activate([width])
             
             if horizontal == BalloonViewHorizontal.LEFT {
