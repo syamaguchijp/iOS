@@ -21,7 +21,15 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
         
-        startAuthorization()
+        locationManager.delegate = self
+        
+        let status = CLLocationManager.authorizationStatus()
+        if status == .authorizedWhenInUse {
+            stopLocationManager()
+            startLocationManager()
+        } else {
+            startAuthorization()
+        }
     }
     
     private func startAuthorization() {
@@ -29,19 +37,12 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
         
         locationManager.requestWhenInUseAuthorization()
-        
-        let status = CLLocationManager.authorizationStatus()
-        if status == .authorizedWhenInUse {
-            stopLocationManager()
-            startLocationManager()
-        }
     }
     
     private func startLocationManager() {
         
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
         
-        locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100.0
         locationManager.startUpdatingLocation()
