@@ -21,6 +21,7 @@ struct ContentView: View {
             .padding()
         
         Label("Sun", systemImage:"sun.max.fill")
+            .padding()
 
         Image("car").resizable().aspectRatio(contentMode:.fit).frame(width:200, height:100)
 
