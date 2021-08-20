@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @State private var name = ""
     @State var isActiveSecondView = false
+    @State private var isPowerOn = false
     
     var body: some View {
         
@@ -18,25 +19,36 @@ struct ContentView: View {
             
             ScrollView(.vertical,showsIndicators:true) {
                 
-                // ボタン押下による画面遷移
-                Button(action: {
-                    self.isActiveSecondView.toggle()
-                }) {
-                    Text("ボタンアクションでの画面遷移")
+                VStack{
+                    // ボタン押下による画面遷移
+                    Button(action: {
+                        self.isActiveSecondView.toggle()
+                    }) {
+                        Text("ボタンアクションでの画面遷移")
+                    }
+                    NavigationLink(destination: SecondView(),
+                                   isActive: $isActiveSecondView) {
+                        // コード上でprogramaticallyに遷移するときは、EmptyViewを指定する
+                        EmptyView()
+                    }
+                    // ココマデ
+                    
+                    // NavigationLink押下による画面遷移
+                    NavigationLink(destination: SecondView()) {
+                        Image("car").resizable().aspectRatio(contentMode:.fit).frame(width:200, height:100)
+                    }
+                    // ココマデ
+                    
+                    // @stateでデータバインディング
+                    Button(action: {
+                        self.isPowerOn.toggle() // クリックでisPowerOnの値を反転
+                    }) {
+                        Image(systemName: "power")
+                    }
+                    Text(isPowerOn ? "オン" : "オフ")
+                    // ココマデ
                 }
-                NavigationLink(destination: SecondView(),
-                               isActive: $isActiveSecondView) {
-                    // コード上でprogramaticallyに遷移するときは、EmptyViewを指定する
-                    EmptyView()
-                }
-                // ココマデ
-                
-                // NavigationLink押下による画面遷移
-                NavigationLink(destination: SecondView()) {
-                    Image("car").resizable().aspectRatio(contentMode:.fit).frame(width:200, height:100)
-                }
-                // ココマデ
-                
+        
                 // TextFieldと入力値に対応するText
                 TextField("Name", text: $name)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
