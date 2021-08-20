@@ -122,9 +122,13 @@ struct MyRectView: View {
 }
 
 struct SecondView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("SecondViewです")
-            
+            .padding()
+        Button("戻る") {
+            presentationMode.wrappedValue.dismiss()
+        }
         .navigationBarTitle("SecondView")
     }
 }
