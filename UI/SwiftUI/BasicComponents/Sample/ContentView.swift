@@ -10,10 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var name = ""
-    @State var isActiveSecondView = false
+    @State private var isActiveSecondView = false
     @State private var isPowerOn = false
     @State private var toggleFlag = true
-    
+    @State private var counter = 0
     var body: some View {
         
         NavigationView {
@@ -42,14 +42,21 @@ struct ContentView: View {
                     
                     // @stateでデータバインディング
                     Button(action: {
-                        self.isPowerOn.toggle() // クリックでisPowerOnの値を反転
+                        isPowerOn.toggle() // クリックでisPowerOnの値を反転
                     }) {
                         Image(systemName: "power")
                     }
                     Text(isPowerOn ? "オン" : "オフ")
                     // ココマデ
                     
+                    // Buttonでのデータバインディング
+                    Button(action: {counter += 1}, label: {
+                        Text("counter=\(counter)")
+                    })
+                    // ココマデ
+                    
                     // Toggleでのデータバインディング
+                    // $を付けると@Stateから@Bindingのデータに変換できる
                     Toggle(isOn: $toggleFlag) {
                         Text(toggleFlag ? "ON" : "OFF")
                     }
