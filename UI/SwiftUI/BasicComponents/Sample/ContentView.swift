@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var name = ""
     @State var isActiveSecondView = false
     @State private var isPowerOn = false
+    @State private var toggleFlag = true
     
     var body: some View {
         
@@ -47,8 +48,14 @@ struct ContentView: View {
                     }
                     Text(isPowerOn ? "オン" : "オフ")
                     // ココマデ
+                    
+                    // Toggleでのデータバインディング
+                    Toggle(isOn: $toggleFlag) {
+                        Text(toggleFlag ? "ON" : "OFF")
+                    }
+                    // ココマデ
                 }
-        
+                
                 // TextFieldと入力値に対応するText
                 TextField("Name", text: $name)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
