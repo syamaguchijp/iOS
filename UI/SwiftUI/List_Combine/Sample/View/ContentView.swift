@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // 参照型のデータオブジェクトを扱う場合は、@stateや@bindingではなく@ObservedObject
-    @ObservedObject var viewModel = ContentViewModel()
+    // 参照型のデータオブジェクトを扱う場合は、@stateや@bindingではなく@StateObjectや@ObservedObject
+    // @StateObjectを付与したオブジェクトはViewインスタンスが破棄された後も破棄されずSwiftUIから保持されるが、@ObservedObjectはViewインスタンスが破棄されるとオブジェクトも破棄される
+    @StateObject var viewModel = ContentViewModel()
     
     var body: some View {
         
