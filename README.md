@@ -24,12 +24,12 @@
 ### 1-3 DesignPattern（デザインパターン）
 
 ##### 1-3-1  GoF（Gang of Four）
- -   Creation（生成に関するパターン）
+-   Creation（生成に関するパターン）
    -   Builder
    -   Factory
    -   Prototype
    -   Singleton
- -   Structure（構造に関するパターン）
+-   Structure（構造に関するパターン）
    -   Adapter
    -   Bridge
    -   Composite
@@ -37,7 +37,7 @@
    -   Facade
    -   Flyweight
    -   Proxy
- -   Behavior（振る舞いに関するパターン）
+-   Behavior（振る舞いに関するパターン）
    -   Command
    -   Mediator
    -   Memento
