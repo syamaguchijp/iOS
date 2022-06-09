@@ -78,7 +78,7 @@ extension ViewController: LocationObserverDelegate {
     func LocationObserverDidUpdate(location: CLLocation) {
         
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
-        return
+        
         let lc = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         mapView.setCenter(lc, animated:true)
     }

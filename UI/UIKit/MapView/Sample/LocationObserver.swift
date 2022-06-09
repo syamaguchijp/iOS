@@ -77,7 +77,7 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
         
-        let status = CLLocationManager.authorizationStatus()
+        let status = manager.authorizationStatus
         if status == .authorizedWhenInUse {
             stopLocationManager()
             startLocationManager()
