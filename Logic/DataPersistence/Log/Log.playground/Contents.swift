@@ -61,6 +61,22 @@ class Log: NSObject {
         
         return filePath
     }
+    
+    fileprivate class func deleteFile(_ fileName: String) {
+        
+        let fileManager = FileManager.default
+        guard let fPath = Log.makeFilePath(fileName) else {
+            return
+        }
+        if !fileManager.fileExists(atPath: fPath) {
+            return
+        }
+        do {
+            try fileManager.removeItem(atPath: fPath)
+        } catch {
+            print("Removing file failed!")
+        }
+    }
 }
 
 
