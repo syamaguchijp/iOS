@@ -16,6 +16,7 @@
 		D07EBEDC26A6AA2300877573 /* LocationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EBEDB26A6AA2300877573 /* LocationObserver.swift */; };
 		D07EBEDE26A6AE4E00877573 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EBEDD26A6AE4E00877573 /* Log.swift */; };
 		D07EBEE126A6AF2C00877573 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07EBEE026A6AF2C00877573 /* CoreLocation.framework */; };
+		D0ADF3A628531734002400F1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0ADF3A528531734002400F1 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D07EBEDB26A6AA2300877573 /* LocationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationObserver.swift; sourceTree = "<group>"; };
 		D07EBEDD26A6AE4E00877573 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		D07EBEE026A6AF2C00877573 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D0ADF3A528531734002400F1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0ADF3A628531734002400F1 /* MapKit.framework in Frameworks */,
 				D07EBEE126A6AF2C00877573 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,6 +83,7 @@
 		D07EBEDF26A6AF2C00877573 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0ADF3A528531734002400F1 /* MapKit.framework */,
 				D07EBEE026A6AF2C00877573 /* CoreLocation.framework */,
 			);
 			name = Frameworks;

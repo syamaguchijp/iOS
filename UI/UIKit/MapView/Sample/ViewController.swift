@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var mapView: MKMapView!
     private let locationObserver = LocationObserver()
     
@@ -35,19 +35,35 @@ class ViewController: UIViewController {
         mapView.mapType = MKMapType.standard
     }
     
+    private func startLocation() {
+        
+        locationObserver.delegate = self
+        locationObserver.start()
+    }
+    
     private func setAnnotation(location: CLLocationCoordinate2D) {
         
         mapView.removeAnnotations(mapView.annotations)
+        
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
         annotation.title = "現在地"
         mapView.addAnnotation(annotation)
     }
     
-    private func startLocation() {
+    private func drawPolyline() {
         
-        locationObserver.delegate = self
-        locationObserver.start()
+        mapView.removeOverlays(mapView.overlays)
+        
+        let coordinates = Log.readLocation()
+        let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        mapView.addOverlay(polyLine)
+    }
+    
+    @IBAction func didTapDeleteButton(_ sender: Any) {
+        // 位置情報のログ、軌跡をすべて消す
+        Log.deleteAllLocation()
+        drawPolyline()
     }
 }
 
@@ -71,6 +87,20 @@ extension ViewController: MKMapViewDelegate {
         annotationView.canShowCallout = true // 吹き出し
         return annotationView
     }
+    
+    // 軌跡表示直前にコールされる
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        if let polyline = overlay as? MKPolyline {
+            let polylineRenderer = MKPolylineRenderer(polyline: polyline)
+            polylineRenderer.strokeColor = .purple
+            polylineRenderer.lineWidth = 2.0
+            return polylineRenderer
+        }
+        return MKOverlayRenderer()
+    }
 }
 
 extension ViewController: LocationObserverDelegate {
@@ -81,6 +111,9 @@ extension ViewController: LocationObserverDelegate {
         
         let lc = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         mapView.setCenter(lc, animated:true)
+        setAnnotation(location: lc)
+        
+        drawPolyline()
     }
 }
 

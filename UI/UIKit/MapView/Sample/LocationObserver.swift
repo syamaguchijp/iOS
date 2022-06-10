@@ -16,15 +16,17 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
     
     weak var delegate: LocationObserverDelegate?
     private let locationManager = CLLocationManager()
+    private let significantLocationManager = CLLocationManager()
     
     func start() {
         
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
         
         locationManager.delegate = self
+        significantLocationManager.delegate = self
         
-        let status = CLLocationManager.authorizationStatus()
-        if status == .authorizedWhenInUse {
+        let status = locationManager.authorizationStatus
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
             stopLocationManager()
             startLocationManager()
         } else {
@@ -36,23 +38,32 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
         
-        locationManager.requestWhenInUseAuthorization()
+        //locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
     }
     
     private func startLocationManager() {
         
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
         
+        // GPS
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100.0
         locationManager.startUpdatingLocation()
+        
+        // Significant
+        significantLocationManager.startMonitoringSignificantLocationChanges()
     }
     
     private func stopLocationManager() {
         
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
         
+        // GPS
         locationManager.stopUpdatingLocation()
+        
+        // Significant
+        significantLocationManager.stopMonitoringSignificantLocationChanges()
     }
     
     // MARK: CLLocationManagerDelegate
@@ -60,15 +71,13 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                 didUpdateLocations locations: [CLLocation]) {
         
-        Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
-        
         let location = locations.first
-        let latitude = location?.coordinate.latitude
-        let longitude = location?.coordinate.longitude
-        print("latitude: \(latitude!)")
-        print("longitude: \(longitude!)")
-        
+
         if let location = location {
+            let latitude = location.coordinate.latitude
+            let longitude = location.coordinate.longitude
+            Log.log("\(NSStringFromClass(type(of: self))) \(#function) lat=\(latitude) lon=\(longitude)")
+            Log.logLocation(location)
             delegate?.LocationObserverDidUpdate(location: location)
         }
     }
@@ -78,7 +87,7 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         Log.log("\(NSStringFromClass(type(of: self))) \(#function)")
         
         let status = manager.authorizationStatus
-        if status == .authorizedWhenInUse {
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
             stopLocationManager()
             startLocationManager()
         }
