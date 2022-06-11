@@ -117,8 +117,8 @@ class KeyBoardManager: NSObject {
         }
         
         sv.scrollIndicatorInsets = scrollIndicatorInsets
-        sv.contentInset = contentInset
-        //sv.contentOffset = CGPoint(x: 0, y : 0) // iOS15
+        //sv.contentInset = contentInset // iOS14
+        sv.contentInset = UIEdgeInsets.init(top: sv.contentInset.top, left: 0, bottom: 0, right: 0) // iOS15
     }
     
     /// スクロールビューのサイズを更新し、キーボードを表示したときに下に隠れないように、せりあげるようにする
