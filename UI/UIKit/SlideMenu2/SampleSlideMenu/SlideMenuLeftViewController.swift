@@ -18,8 +18,7 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
     private let selectedTextColor = UIColor.red
     private let deselectedTextColor = UIColor.black
     private let headerViewHeight: CGFloat = 60.0
-    
-    private var footerViewHeight: CGFloat = 0.0
+    //private var footerViewHeight: CGFloat = 0.0
     
     // MARK: LifeCycle
     
@@ -43,7 +42,7 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLayoutSubviews()
         
         // フッタービューに付与すべき高さを設定する
-        footerViewHeight = tableView.frame.size.height - slideMenuRowHeight * CGFloat(slideMenuRowCount) - headerViewHeight
+        //footerViewHeight = tableView.frame.size.height - slideMenuRowHeight * CGFloat(slideMenuRowCount) - headerViewHeight
     }
     
     // MARK: TableView Delegate
@@ -53,10 +52,9 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
         
         return headerViewHeight
     }
-    
+    /*
     /// フッタービューの高さを設定する
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        
         return footerViewHeight
     }
     
@@ -71,7 +69,7 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
         footerView.addSubview(separateLine)
         
         return footerView
-    }
+    }*/
     
     /// 行数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

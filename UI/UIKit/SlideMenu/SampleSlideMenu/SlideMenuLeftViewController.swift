@@ -18,8 +18,7 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
     private let selectedTextColor = UIColor.red
     private let deselectedTextColor = UIColor.black
     private let headerViewHeight: CGFloat = 60.0
-    
-    private var footerViewHeight: CGFloat = 0.0
+    //private var footerViewHeight: CGFloat = 0.0
     
     // MARK: LifeCycle
     
@@ -43,7 +42,7 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLayoutSubviews()
         
         // フッタービューに付与すべき高さを設定する
-        footerViewHeight = tableView.frame.size.height - slideMenuRowHeight * CGFloat(slideMenuRowCount) - headerViewHeight
+        //footerViewHeight = tableView.frame.size.height - slideMenuRowHeight * CGFloat(slideMenuRowCount) - headerViewHeight
         
         // シャドウをつけ、メニュー部分とのフリンジを際立たせる
         let caLayer = self.view.layer
@@ -62,25 +61,24 @@ class SlideMenuLeftViewController: UIViewController, UITableViewDataSource, UITa
         
         return headerViewHeight
     }
-    
+    /*
     /// フッタービューの高さを設定する
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        
         return footerViewHeight
     }
     
     /// フッタービューを生成する
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        let footerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: footerViewHeight))
-        footerView.backgroundColor = UIColor.clear
+        //let footerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: footerViewHeight))
+        //footerView.backgroundColor = UIColor.clear
         
         let separateLine = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: 1.0))
         separateLine.backgroundColor = UIColor(red: 34.0 / 255.0, green: 34.0 / 255.0, blue: 34.0 / 255.0, alpha: 0.5)
         footerView.addSubview(separateLine)
         
         return footerView
-    }
+    }*/
     
     /// 行数を設定する
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
