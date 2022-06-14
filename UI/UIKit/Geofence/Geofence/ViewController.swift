@@ -42,5 +42,10 @@ extension ViewController: LocationObserverDelegate {
         
         sendNotification(title: "ExitRegion", message: region.identifier)
     }
+    
+    func LocationObserverDidVisit(visit: CLVisit) {
+        
+        sendNotification(title: "Visit", message: "from \(visit.arrivalDate) to \(visit.departureDate) coordinate = \(visit.coordinate)")
+    }
 }
 

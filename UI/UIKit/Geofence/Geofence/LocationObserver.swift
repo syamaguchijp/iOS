@@ -8,10 +8,11 @@
 import UIKit
 import CoreLocation
 
-// 領域観測
+// 領域観測とCLVisit
 protocol LocationObserverDelegate: AnyObject {
     func LocationObserverDidEnterRegion(region: CLRegion)
     func LocationObserverDidExitRegion(region: CLRegion)
+    func LocationObserverDidVisit(visit: CLVisit)
 }
 
 class LocationObserver: NSObject, CLLocationManagerDelegate {
@@ -50,6 +51,7 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         print("\(NSStringFromClass(type(of: self))) \(#function)")
         
         locationManager.startMonitoring(for: moniteringRegion)
+        locationManager.startMonitoringVisits()
     }
     
     private func stopRegionMonitoring() {
@@ -57,6 +59,7 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
         print("\(NSStringFromClass(type(of: self))) \(#function)")
         
         locationManager.stopMonitoring(for: moniteringRegion)
+        locationManager.stopMonitoringVisits()
     }
     
     // MARK: CLLocationManagerDelegate
@@ -84,6 +87,13 @@ class LocationObserver: NSObject, CLLocationManagerDelegate {
             stopRegionMonitoring()
             startRegionMonitoring()
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
+        
+        print("\(NSStringFromClass(type(of: self))) \(#function)")
+        
+        delegate?.LocationObserverDidVisit(visit: visit)
     }
 }
 
