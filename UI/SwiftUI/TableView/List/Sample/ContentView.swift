@@ -21,10 +21,10 @@ struct ContentView: View {
         NavigationView {
             List {
                 Section(header: Text("都道府県")) {
-                    ForEach(0 ..< prefectures.count) { index in
-                        ListRow(pref: prefectures[index])
+                    ForEach(prefectures, id: \.self) { prefecture in
+                        ListRow(pref: prefecture)
                             .onTapGesture {
-                                print("Tapped \(index).")
+                                print("Tapped \(prefecture).")
                             }
                     }
                 }

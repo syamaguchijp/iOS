@@ -20,8 +20,8 @@ struct ContentView: View {
         NavigationView {
             ScrollView(.vertical) {
                 LazyVStack {
-                    ForEach(0 ..< prefectures.count) { index in
-                        ListRow(pref: prefectures[index])
+                    ForEach(prefectures, id: \.self) { prefecture in
+                        ListRow(pref: prefecture)
                     }
                 }
             }

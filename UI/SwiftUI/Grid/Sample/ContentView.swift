@@ -20,10 +20,10 @@ struct ContentView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 4)) {
-                    ForEach(0 ..< prefectures.count) { index in
-                        MyCell(pref: prefectures[index])
+                    ForEach(prefectures, id: \.self) { prefecture in
+                        MyCell(pref: prefecture)
                             .onTapGesture {
-                                print("Tapped \(index).")
+                                print("Tapped \(prefecture).")
                             }
                     }
                 }
