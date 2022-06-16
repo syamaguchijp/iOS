@@ -16,7 +16,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKNavigationDelega
 
     let kToolBarIconHeightOfWebView = 40
     let kToolBarAnimationDurationSec = 0.5
-    let kApplicationTintColor: UIColor = UIColor(red: 251.0 / 255.0, green: 99.0 / 255.0, blue: 126.0 / 255.0, alpha: 1.0)
+    let kApplicationTintColor = UIColor(red: 251.0 / 255.0, green: 99.0 / 255.0, blue: 126.0 / 255.0, alpha: 1.0)
     
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var toolBar: UIToolbar!
@@ -29,7 +29,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKNavigationDelega
     private var forwardButton: UIBarButtonItem?
     private var refreshButton: UIBarButtonItem?
     private var quitButton: UIBarButtonItem?
-    private var toolBarScrollStatus: IrgToolBarScrollStatus = IrgToolBarScrollStatus.irgToolBarScrollStatusInit
+    private var toolBarScrollStatus = IrgToolBarScrollStatus.irgToolBarScrollStatusInit
     private var beginScrollOffsetY: CGFloat = 0
 
     override func viewDidLoad() {
@@ -77,6 +77,12 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKNavigationDelega
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        
+        self.finishNetworkIndicator()
+        self.changeToolBarButtonStatus()
+    }
+  
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         
         self.finishNetworkIndicator()
         self.changeToolBarButtonStatus()
@@ -139,25 +145,25 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKNavigationDelega
         
         self.spacer = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
         
-        let backInnerButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
+        let backInnerButton = UIButton(type: UIButton.ButtonType.custom)
         backInnerButton.setImage(UIImage(named: "btn_prev.png"), for: UIControl.State())
         backInnerButton.frame = CGRect(x: 0, y: 0, width: kToolBarIconHeightOfWebView, height: kToolBarIconHeightOfWebView)
         backInnerButton.addTarget(self, action: #selector(goBack), for: UIControl.Event.touchUpInside)
         self.backButton = UIBarButtonItem.init(customView: backInnerButton)
         
-        let forwardInnerButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
+        let forwardInnerButton = UIButton(type: UIButton.ButtonType.custom)
         forwardInnerButton.setImage(UIImage(named: "btn_next.png"), for: UIControl.State())
         forwardInnerButton.frame = CGRect(x: 0, y: 0, width: kToolBarIconHeightOfWebView, height: kToolBarIconHeightOfWebView)
         forwardInnerButton.addTarget(self, action: #selector(goForward), for: UIControl.Event.touchUpInside)
         self.forwardButton = UIBarButtonItem.init(customView: forwardInnerButton)
         
-        let refreshInnerButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
+        let refreshInnerButton = UIButton(type: UIButton.ButtonType.custom)
         refreshInnerButton.setImage(UIImage(named: "btn_reload.png"), for: UIControl.State())
         refreshInnerButton.frame = CGRect(x: 0, y: 0, width: kToolBarIconHeightOfWebView, height: kToolBarIconHeightOfWebView)
         refreshInnerButton.addTarget(self, action: #selector(reloadWebView), for: UIControl.Event.touchUpInside)
         self.refreshButton = UIBarButtonItem.init(customView: refreshInnerButton)
         
-        let quitInnerButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
+        let quitInnerButton = UIButton(type: UIButton.ButtonType.custom)
         quitInnerButton.setImage(UIImage(named: "btn_close.png"), for: UIControl.State())
         quitInnerButton.frame = CGRect(x: 0, y: 0, width: kToolBarIconHeightOfWebView, height: kToolBarIconHeightOfWebView)
         quitInnerButton.addTarget(self, action: #selector(killMyself), for: UIControl.Event.touchUpInside)
