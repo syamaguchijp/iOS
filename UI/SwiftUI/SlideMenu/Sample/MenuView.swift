@@ -19,31 +19,29 @@ struct MenuView: View {
         
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
-                if self.isOpen {
-                    List {
-                        Section(header: Text("Menu")) {
-                            ForEach(0..<MenuNames.count) { index in
-                                MenuRowView(name: MenuNames[index])
-                                    .onTapGesture {
-                                        print("\(String(describing: type(of: self))) \(#function)")
-                                        self.selectedMenuNumber = index
-                                        self.isOpen = false
-                                    }
-                                    .listRowBackground(self.selectedMenuNumber == index ? Color.yellow : Color.white)
-                            }
+                ScrollView(.vertical) {
+                    LazyVStack {
+                        Text("Menu")
+                        ForEach(0..<MenuNames.count) { index in
+                            MenuRowView(selectedMenuNumber: $selectedMenuNumber, name: MenuNames[index], number: index)
+                                .onTapGesture {
+                                    print("\(String(describing: type(of: self))) \(#function)")
+                                    self.selectedMenuNumber = index
+                                    self.isOpen = false
+                                }
                         }
                     }
-                    .listStyle(PlainListStyle())
                     .background(Color.white.opacity(1.0))
                     .frame(width: geometry.size.width * 0.7)
                     .padding(geometry.safeAreaInsets)
-                    .onTapGesture {
-                        print("\(String(describing: type(of: self))) \(#function)")
-                        self.isOpen = false
-                    }
-                    .transition(.move(edge: .leading))
+                }
+                .background(Color.white.opacity(1.0))
+                .onTapGesture {
+                    print("\(String(describing: type(of: self))) \(#function)")
+                    self.isOpen = false
                 }
             }
+            .offset(x: self.isOpen ? 0 : -geometry.size.width)
             .animation(.spring())
             .edgesIgnoringSafeArea([.top, .bottom])
         }
@@ -52,7 +50,9 @@ struct MenuView: View {
 
 struct MenuRowView: View {
     
+    @Binding var selectedMenuNumber: Int
     var name: String
+    var number: Int
     
     var body: some View {
         HStack {
@@ -60,7 +60,7 @@ struct MenuRowView: View {
                 .frame(width: 50, height: 50)
             Text(name)
                 .frame(maxWidth: .infinity, alignment: .leading)
-        }
+        }.background(self.selectedMenuNumber == number ? Color.yellow : Color.white)
     }
 }
 
