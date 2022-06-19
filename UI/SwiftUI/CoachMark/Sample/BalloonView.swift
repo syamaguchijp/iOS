@@ -20,6 +20,32 @@ struct BalloonView: View {
             Triangle()
                 .fill(Color.red)
                 .frame(width: 20, height: 10)
+            ZStack {
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .fill(Color.red)
+                    .frame(width: width)
+                VStack {
+                    Text(message)
+                        .foregroundColor(.white)
+                        .frame(width: width - widthPadding * 2)
+                        .padding(15)
+                    Button("OK") {
+                    }
+                        .frame(alignment : .bottomTrailing) // doesnt work
+                        .offset(x: 0, y: -10)
+                }
+            }
+            .fixedSize(horizontal: false, vertical: true) // ZStack内のRoundedRectangleとVStackを同じ高さにする
+            }
+    }
+    
+    /*
+    // 高さを無理やり計算するバージョン
+    var body: some View {
+        VStack(spacing: 0) {
+            Triangle()
+                .fill(Color.red)
+                .frame(width: 20, height: 10)
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .fill(Color.red)
                 .frame(width: width,
@@ -45,6 +71,7 @@ struct BalloonView: View {
             context: nil
         ).height
     }
+    */
 }
 
 struct Triangle: Shape {
