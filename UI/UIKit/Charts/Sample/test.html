@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0" />
+</head>
+<body>
+  
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+      'use strict';
+      google.charts.load('current', {packages: ['corechart']});
+      
+      function drawPieChart(data) {
+            
+          var dataTable　= new google.visualization.DataTable();
+          dataTable.addColumn('string', 'Prefetcure');
+          dataTable.addColumn('number', 'Population');
+
+          // var decodedData = window.atob(data); // これだと日本語で文字化けする
+          var decodedData = decodeURIComponent(escape(atob(data)))
+          var transferData = JSON.parse(decodedData);
+
+          for (var i = 0; i < transferData.length; i++) {
+              webkit.messageHandlers.dumpCallback.postMessage(transferData[i][0]);
+              dataTable.addRow([transferData[i][0], transferData[i][1]]);
+          }
+          var options = {
+              width: 400,
+              height: 400,
+              title: '円グラフ'
+          };
+          var chart = new google.visualization.PieChart(document.getElementById('target'));
+          chart.draw(dataTable, options);
+      }
+      
+      function drawLineChart(data) {
+
+          var decodedData = decodeURIComponent(escape(atob(data)))
+          var transferData = JSON.parse(decodedData);
+          var dataTable　= new google.visualization.arrayToDataTable(transferData);
+          var options = {
+              width: 400,
+              height: 300,
+              title: '折れ線グラフ'
+          };
+          var chart = new google.visualization.LineChart(document.getElementById('target2'));
+          chart.draw(dataTable, options);
+      }
+
+      //google.charts.setOnLoadCallback(drawPieChart);
+  </script>
+  
+  <div id="target"></div>
+  
+  <div id="target2"></div>
+  
+</body>
+</html>
+
+
